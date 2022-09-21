@@ -1,0 +1,2 @@
+.list{display:grid;grid-template-columns:100px 1fr 1fr;grid-auto-flow:row;justify-items:start;align-items:start}.item{margin:20px;border:2px;border-color:#8a2be2;background-color:#0ff;color:#00f}.header{grid-column:3/3;grid-row:3/3}
+/*# sourceMappingURL=/goit-js-hw-09/grid.0a0ba171.css.map */
