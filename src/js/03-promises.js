@@ -11,33 +11,47 @@ formEl.addEventListener("submit", ((event) => {
   formData.forEach((value, name)=> {
   dataFormObject[name] = value;  
 })
-  const delay = Number(dataFormObject.delay)
+  let delay = Number(dataFormObject.delay)
   const amount = Number(dataFormObject.amount)
   const step = Number(dataFormObject.step)
   let stepNumber;
   let iStep;
-
-  if (step) {
-    stepNumber = (step*amount)+delay;
-    iStep = step}
-  else {
-    stepNumber = delay*amount;
-    iStep = delay -1 };
-
-  for(let iDelay = delay; iDelay < stepNumber; iDelay += iStep) {
+  
+  for(let i = 1; i <= amount; i += 1) {
     setTimeout(() => {
-      let iiDelay;
-    if (step === 0) {iiDelay = delay} else {iiDelay = iDelay}
-      position += 1
-    
-  createPromise(position, iiDelay)
+    createPromise(i, delay)
     .then(({ position, delay }) => {
     Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms` 
   )})
     .catch(({ position, delay }) => {       
     Notify.failure(`Rejected promise ${position} in ${delay}ms`);
   });
-  }, iDelay)}
+  
+  }, delay)
+  delay += step;}
+  
+  
+  // if (step) {
+  //   stepNumber = (step*amount)+delay;
+  //   iStep = step}
+  // else {
+  //   stepNumber = delay*amount;
+  //   iStep = delay -1 };
+
+  // for(let iDelay = delay; iDelay < stepNumber; iDelay += iStep) {
+  //   setTimeout(() => {
+  //     let iiDelay;
+  //   if (step === 0) {iiDelay = delay} else {iiDelay = iDelay}
+  //     position += 1
+    
+  // createPromise(position, iiDelay)
+  //   .then(({ position, delay }) => {
+  //   Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms` 
+  // )})
+  //   .catch(({ position, delay }) => {       
+  //   Notify.failure(`Rejected promise ${position} in ${delay}ms`);
+  // });
+  // }, iDelay)}
 }));
 
 function createPromise(position, delay) {  
